@@ -7,5 +7,9 @@ public class Marker {
 		this.num = num;
 		this.piece = piece;
 	}
+	
+	public String toString() {
+		return "This marker is for piece " + piece.name() + " and has num: " + num;
+	}
 
 }

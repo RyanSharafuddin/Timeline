@@ -162,19 +162,26 @@ public abstract class Piece {
 		String s = "\n";
 		s += BoardGUI.colorString(BoardGUI.getColor(this));
 		s += (this instanceof Rook) ? " rook" : " bishop"; //Only valid as long as there are only two pieces
-		if (location != null) {
+		if (onBoard) {
 			String l = location.toString();
 			s += "\n Location: " + l;
 		}
 		else {
-			s += " \n Not on board";
+			s += " \nNot on board, but location is " + location;
 		}
 		String t = "\n Timeline:";
 		for (Coord ti: timeline) {
 			t += "\n" + ti.toString();
 		}
 		s += t;
+		s += "done printing piece\n";
 		return s;
+	}
+	
+	public String name() {
+		String p = (this instanceof Rook) ? " rook" : " bishop";
+		String display = BoardGUI.colorString(BoardGUI.getColor(this)) + p;
+		return display;
 	}
 
 }

@@ -65,6 +65,7 @@ public class SmartBot extends TimelineBot {
 	
 	//the God algorithm. Warm is maximizer.
 		public double alphaBeta(double alpha, double beta, boolean warm, int levelsToLook) {
+			int depth = lookAhead - levelsToLook + 1;
 			if ((gameOver) || (levelsToLook == 0)) {
 				return evaluate();
 			}
@@ -101,8 +102,8 @@ public class SmartBot extends TimelineBot {
 				for (AnalyticalMove m: moves) {
 					AnalyticalMove feed = new AnalyticalMove(m);
 					move(feed.p, feed.toAdd);
-					undo();
 					score = alphaBeta(alpha, beta, (!warm), levelsToLook - 1);
+					undo();
 					if (score < beta) {
 						beta = score;
 						if (levelsToLook == lookAhead) {
@@ -122,7 +123,7 @@ public class SmartBot extends TimelineBot {
 	
 	@Override
 	public AnalyticalMove chooseMove() {
-		alphaBeta(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, isWarm, lookAhead);
+		eval = alphaBeta(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, isWarm, lookAhead);
 		return bestMove;
 	}
 

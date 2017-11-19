@@ -58,7 +58,7 @@ public class TimelineGame implements Runnable {
 	
 	@Override
 	public void run() {
-		final JFrame frame = new JFrame("Timeline");
+		final JFrame frame = new JFrame("Timeline Improved");
 		
 		final JButton undo = new JButton("Undo");
 		undo.addActionListener(new ActionListener() {

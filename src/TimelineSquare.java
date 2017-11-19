@@ -42,4 +42,12 @@ public class TimelineSquare {
 		return captured;
 	}
 	
+	public String toString() {
+		String s = "\nPrinting contents of square at: " + location.toString() + "\n";
+		s += "Marker is " + marker;
+		s += "\nCaptured is " + captured;
+		s += "\nPiece is " + piece;
+		return s;
+	}
+	
 }

@@ -13,4 +13,24 @@ public class UndoDetails {
 		vanishedTimeline = l;
 		aliveAtEnd = a;
 	}
+
+
+	public String toString() {
+		String s = "\nUndoDetails string: \nMover is " + mover.name() + "\numMoved is ";
+		s += numMoved + "\n the vanishedTimeline is: ";
+		if(vanishedTimeline == null || vanishedTimeline.isEmpty()) {
+			s += "null or empty";
+		}
+		else {
+			for (Coord c: vanishedTimeline) {
+				s += "\n" + c;
+			}
+		}
+
+		s += (aliveAtEnd) ? "\nalive" : "\ndead";
+		s += "Done printing UndoDetail\n";
+		return s;
+
+	}
 }
+

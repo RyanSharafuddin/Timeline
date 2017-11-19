@@ -19,4 +19,9 @@ public class AnalyticalMove {
 			toAdd.add(new Coord(c));
 		}
 	}
+	
+    public String toString() {
+        String s = p.name() + "  " + toAdd;
+        return s;
+}
 }
