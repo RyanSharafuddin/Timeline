@@ -101,6 +101,7 @@ public class SmartBot extends TimelineBot {
 				for (AnalyticalMove m: moves) {
 					AnalyticalMove feed = new AnalyticalMove(m);
 					move(feed.p, feed.toAdd);
+					undo();
 					score = alphaBeta(alpha, beta, (!warm), levelsToLook - 1);
 					if (score < beta) {
 						beta = score;

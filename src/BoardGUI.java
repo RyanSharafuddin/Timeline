@@ -273,6 +273,7 @@ public class BoardGUI extends JPanel {
 		
 		if(b instanceof TimelineBot && b.getWarmTurn() == ((TimelineBot) b).isWarm) {
 			history.add(((TimelineBot) b).botMove());
+			undoStatus();
 			if(b.gameOver || b.getMoves().isEmpty()) {
 				b.gameOver = true;
 				finish();

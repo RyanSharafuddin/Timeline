@@ -72,7 +72,7 @@ public class TimelineGame implements Runnable {
 					System.out.println("Too late to undo. Game is over!");
 					return;
 				}
-				tb.piece = null;
+				tb.deselectPiece();
 				tb.b.undo();
 				tb.undoStatus();
 				tb.setHighlight();
