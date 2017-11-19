@@ -10,7 +10,7 @@ public abstract class TimelineBot extends TimelineBoard {
 	public abstract AnalyticalMove chooseMove();
 	
 	public Move botMove() {
-		System.out.println("Processing . . .\n");
+		System.out.println("\nProcessing . . .");
 		long startTime = System.currentTimeMillis();
 		AnalyticalMove toMove = chooseMove();
 		long stopTime = System.currentTimeMillis();

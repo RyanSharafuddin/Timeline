@@ -81,8 +81,7 @@ public class SmartBot extends TimelineBot {
 		
 			if (warm) {
 				for (AnalyticalMove m: moves) {
-					AnalyticalMove feed = new AnalyticalMove(m);
-					move(feed.p, feed.toAdd);
+					move(m.p, m.toAdd);
 					score = alphaBeta(alpha, beta, (!warm), levelsToLook - 1);
 					undo();
 					if (score > alpha) {
@@ -100,8 +99,7 @@ public class SmartBot extends TimelineBot {
 			
 			else { //minimizer (cold) turn
 				for (AnalyticalMove m: moves) {
-					AnalyticalMove feed = new AnalyticalMove(m);
-					move(feed.p, feed.toAdd);
+					move(m.p, m.toAdd);
 					score = alphaBeta(alpha, beta, (!warm), levelsToLook - 1);
 					undo();
 					if (score < beta) {
