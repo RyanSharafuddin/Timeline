@@ -1,3 +1,6 @@
+import java.text.NumberFormat;
+import java.util.Locale;
+
 
 public abstract class TimelineBot extends TimelineBoard {
 	public final boolean isWarm;
@@ -15,8 +18,12 @@ public abstract class TimelineBot extends TimelineBoard {
 		AnalyticalMove toMove = chooseMove();
 		long stopTime = System.currentTimeMillis();
 		long elapsedTime = stopTime - startTime;
-		System.out.println("Time taken: " + elapsedTime + " milliseconds.");
+		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+		System.out.println("Time taken: " + elapsedTime / 1000.0 + " seconds.");
 		if(this instanceof SmartBot) {
+			//String posString =  "" + ((SmartBot) this).positionsAnalyzed;
+			String posString = numberFormat.format(((SmartBot) this).positionsAnalyzed);
+			System.out.println("Positions evaluated: " + posString);
 			System.out.println("alphaBeta result is " + ((SmartBot) this).eval);
 		}
 		Coord start = new Coord(toMove.p.getLocation());

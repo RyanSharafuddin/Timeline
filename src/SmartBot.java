@@ -1,10 +1,9 @@
 import java.util.List;
 
-//BE CAREFUL! IF BUGGY, MAY HAVE TO MAKE COPIES OF ANALYTICAL MOVES
-//TO PREVENT INTERACTIONS WITH OTHER STUFF
 public class SmartBot extends TimelineBot {
 	public double eval;
-	public int lookAhead = 5;
+	public int positionsAnalyzed;
+	public int lookAhead = 6; //6 is now tolerable
 	AnalyticalMove bestMove;
 
 	public SmartBot(boolean team) {
@@ -33,6 +32,7 @@ public class SmartBot extends TimelineBot {
 	
 	//WARM IS MAXIMIZER, COLD IS MINIMIZER!
 	public double evaluate() {
+		positionsAnalyzed += 1;
 		if (gameOver) {
 			if(warmLost)
 				return Double.NEGATIVE_INFINITY;
@@ -121,6 +121,7 @@ public class SmartBot extends TimelineBot {
 	
 	@Override
 	public AnalyticalMove chooseMove() {
+		positionsAnalyzed = 0;
 		eval = alphaBeta(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, isWarm, lookAhead);
 		return bestMove;
 	}
