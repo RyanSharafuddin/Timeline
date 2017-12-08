@@ -52,6 +52,7 @@ public class BoardGUI extends JPanel {
 				this.add(section);
 			}
 		}
+		baseStatus();
 		
 	}
 	
@@ -160,13 +161,15 @@ public class BoardGUI extends JPanel {
 		piece = null;
 		String turn = "Turn: " + t;
 		status.setText(turn);
+		baseStatus();
 	}
 	
-	public void undoStatus() {
+	public void baseStatus() {
 		String t = (b.getWarmTurn()) ? "Warm. " : "Cold. "; 
-		String turn = "Turn: " + t;
+		String turn = "Move: " + b.moveNum + " Turn: " + t;
 		status.setText(turn);
 	}
+	
 	
 	/* Sets gameover status text and writes game to gameLog*/
 	public void finish() {
@@ -273,7 +276,7 @@ public class BoardGUI extends JPanel {
 		
 		if(b instanceof TimelineBot && b.getWarmTurn() == ((TimelineBot) b).isWarm) {
 			history.add(((TimelineBot) b).botMove());
-			undoStatus();
+			baseStatus();
 			if(b.gameOver || b.getMoves().isEmpty()) {
 				b.gameOver = true;
 				finish();
