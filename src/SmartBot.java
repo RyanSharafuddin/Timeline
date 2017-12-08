@@ -1,4 +1,6 @@
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class SmartBot extends TimelineBot {
 	public double eval;
@@ -32,7 +34,6 @@ public class SmartBot extends TimelineBot {
 	
 	//WARM IS MAXIMIZER, COLD IS MINIMIZER!
 	public double evaluate() {
-		positionsAnalyzed += 1;
 		if (gameOver) {
 			if(warmLost)
 				return Double.NEGATIVE_INFINITY;
@@ -65,7 +66,8 @@ public class SmartBot extends TimelineBot {
 	
 	//the God algorithm. Warm is maximizer.
 		public double alphaBeta(double alpha, double beta, boolean warm, int levelsToLook) {
-			int depth = lookAhead - levelsToLook + 1;
+			positionsAnalyzed += 1;
+			int depth = lookAhead - levelsToLook; //varies from 0 to lookAhead
 			if ((gameOver) || (levelsToLook == 0)) {
 				return evaluate();
 			}
@@ -124,6 +126,14 @@ public class SmartBot extends TimelineBot {
 		positionsAnalyzed = 0;
 		eval = alphaBeta(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, isWarm, lookAhead);
 		return bestMove;
+	}
+	
+	public void printStats() { 
+		NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+		String posString = nf.format(positionsAnalyzed);
+		System.out.println("Positions evaluated: " + posString);
+		System.out.println("alphaBeta result is " + eval);
+		
 	}
 
 }

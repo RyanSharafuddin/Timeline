@@ -9,6 +9,10 @@ public class DumbBot extends TimelineBot {
 	}
 
 	@Override
+	public void printStats() {
+		return; //no stats to print
+	}
+	@Override
 	public AnalyticalMove chooseMove() {
 		List<AnalyticalMove> moves = getMoves();
 		int numMoves = moves.size();

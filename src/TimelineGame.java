@@ -22,7 +22,7 @@ public class TimelineGame implements Runnable {
 	public static boolean showValid;
 	public Opponent opp;
 	public boolean botIsWarm;
-	public static String gameLog = "Gamelog.txt";
+	public static String gameLog = "/Users/Ryan/Desktop/Projects/Java/Eclipse Workspace/TimelineImproved/Gamelog.txt";
 	
 	
 	public TimelineGame(boolean show, Opponent o, boolean e) {
@@ -60,6 +60,29 @@ public class TimelineGame implements Runnable {
 	public void run() {
 		final JFrame frame = new JFrame("Timeline Improved");
 		
+		final JPanel buttons = new JPanel();
+		frame.add(buttons, BorderLayout.NORTH);
+		
+		//quit button. if gameover, just exit. if not gameover, write history and exit
+		final JButton quit = new JButton("Quit");
+		quit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(tb.b.gameOver) {
+					System.exit(0);
+				}
+				tb.writeAllMoves();
+				try {
+					tb.writer.write("\nGame quit early");
+					tb.writer.write("\nEND");
+					tb.writer.flush();
+				} catch (IOException ex) {
+					System.out.println("Game log error!");
+				}
+				System.exit(0);
+			}
+		});
+		buttons.add(quit, BorderLayout.NORTH);
+		
 		final JButton undo = new JButton("Undo");
 		undo.addActionListener(new ActionListener() {
 			@Override
@@ -80,7 +103,7 @@ public class TimelineGame implements Runnable {
 				
 			}
 		});
-		frame.add(undo, BorderLayout.NORTH);
+		buttons.add(undo, BorderLayout.NORTH);
 		
 
 		// Status panel
