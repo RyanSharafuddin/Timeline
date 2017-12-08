@@ -157,10 +157,7 @@ public class BoardGUI extends JPanel {
 	
 	public void deselectPiece() {
 		mode = Mode.Select;
-		String t = (b.getWarmTurn()) ? "Warm. " : "Cold. "; 
 		piece = null;
-		String turn = "Turn: " + t;
-		status.setText(turn);
 		baseStatus();
 	}
 	
