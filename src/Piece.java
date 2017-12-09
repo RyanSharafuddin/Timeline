@@ -30,6 +30,16 @@ public abstract class Piece {
 		return timeline.size();
 	}
 	
+	public int numCaptures() { //mainly for use in detecting bishop ties
+		int captures = 0;
+		for(Coord c: timeline) {
+			if(b.square(c).getCaptured() != null) {
+				captures += 1;
+			}
+		}
+		return captures;
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if (o == null) 

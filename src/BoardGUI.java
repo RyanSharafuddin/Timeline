@@ -189,8 +189,8 @@ public class BoardGUI extends JPanel {
 		if(end == Result.TIE) {
 			status.setText("It's a draw!");
 			try {
-				writer.write("\n "+ warm_name + " (Warm) " + 
-						cold_name + " (cold)" + " have drawn!");
+				writer.write("\nDraw: "+ warm_name + " (Warm) " + 
+						cold_name + " (cold)");
 				writer.write("\n" + "END");
 				writer.flush();
 				writer.close();
@@ -222,10 +222,33 @@ public class BoardGUI extends JPanel {
 		}
 	}
 	/*
-	 * If both sides only have opposite colored bishops and neither can free any pieces.
+	 * If both sides only have opposite colored bishops which made all the captures.
 	 */
-	public void detectBishopTie() {
+	public boolean detectBishopTie() {
+		List<Piece> aliveWarm = new LinkedList<Piece>();
+		List<Piece> aliveCold = new LinkedList<Piece>();
+		for (Piece p: b.warmPieces) {
+			if(p.isOnBoard())
+				aliveWarm.add(p);
+		}
+		if(aliveWarm.size() != 1 || !(aliveWarm.get(0) instanceof Bishop))
+			return false;
+		//warm has 1 piece and it's a bishop
+		for (Piece p: b.coldPieces) {
+			if(p.isOnBoard())
+				aliveCold.add(p);
+		}
+		if(aliveCold.size() != 1 || !(aliveCold.get(0) instanceof Bishop))
+			return false;
+		//cold has 1 piece and it's a bishop
 		
+		if(wrapper(aliveWarm.get(0).getLocation()).color == wrapper(aliveCold.get(0).getLocation()).color)
+			return false;
+		//now, they only have opposite colored bishops. did they make all the captures?
+		if(aliveWarm.get(0).numCaptures() != TimelineBoard.NUMPIECES-1 || aliveCold.get(0).numCaptures() != TimelineBoard.NUMPIECES-1)
+			return false;
+		
+		return true;
 	}
 	
 	/* buttonPressed in select mode for Coord c*/
@@ -294,6 +317,13 @@ public class BoardGUI extends JPanel {
 			moveMode(c);
 		
 		setHighlight();
+		
+		if(detectBishopTie()) {
+			System.out.println("There are only opposite colored bishops which cannot free anything.\n"
+					+ "This game is a tie.");
+			b.gameOver = true;
+			finish();
+		}
 	}
 	
 
