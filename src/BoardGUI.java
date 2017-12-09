@@ -227,6 +227,7 @@ public class BoardGUI extends JPanel {
 	public void detectBishopTie() {
 		
 	}
+	
 	/* buttonPressed in select mode for Coord c*/
 	public void selectMode(Coord c) {
 		if (this.b.square(c).getPiece() != null) {
