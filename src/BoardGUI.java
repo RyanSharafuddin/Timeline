@@ -167,6 +167,13 @@ public class BoardGUI extends JPanel {
 		status.setText(turn);
 	}
 	
+	public void selectedStatus() {
+		String p = (piece instanceof Rook) ? " rook" : " bishop";
+		String t = (b.getWarmTurn()) ? " Turn: Warm. " : " Turn: Cold. ";
+		String display = "Move: " + b.moveNum + t + "Selected Piece: " + colorString(getColor(piece)) + p;
+		status.setText(display);
+	}
+	
 	
 	/* Sets gameover status text and writes game to gameLog*/
 	public void finish() {
@@ -214,17 +221,19 @@ public class BoardGUI extends JPanel {
 			System.out.println("Game log error!");
 		}
 	}
-	
+	/*
+	 * If both sides only have opposite colored bishops and neither can free any pieces.
+	 */
+	public void detectBishopTie() {
+		
+	}
 	/* buttonPressed in select mode for Coord c*/
 	public void selectMode(Coord c) {
 		if (this.b.square(c).getPiece() != null) {
 			if (this.b.square(c).getPiece().isWarm == b.getWarmTurn()) {
 				piece = b.square(c).getPiece();
 				mode = Mode.Move;
-				String p = (piece instanceof Rook) ? " rook" : " bishop";
-				String t = (b.getWarmTurn()) ? "Turn: Warm. " : "Turn: Cold. ";
-				String display = t + "Selected Piece: " + colorString(getColor(piece)) + p;
-				status.setText(display);
+				selectedStatus();
 			}
 			else {
 				System.out.println(" \n Enemy team's piece");
@@ -250,10 +259,7 @@ public class BoardGUI extends JPanel {
 		else if (b.square(c).getPiece() != null) {
 			if (b.square(c).getPiece().isWarm == piece.isWarm) {
 				piece = b.square(c).getPiece();
-				//Print which piece selected and highlight valid
-				String p = (piece instanceof Rook) ? " rook" : " bishop";
-				String te = (piece.isWarm) ? "Warm. " : "Cold. ";
-				status.setText("Turn: " + te + "Selected piece: " + colorString(getColor(piece)) + p);
+				selectedStatus();
 			}
 			else {
 				System.out.println("Can't capture this enemy");
@@ -278,10 +284,9 @@ public class BoardGUI extends JPanel {
 				b.gameOver = true;
 				finish();
 			}
-			return;
 		}
 		
-		if (mode == Mode.Select)
+		else if (mode == Mode.Select)
 			selectMode(c);
 		
 		else if (mode == Mode.Move) 

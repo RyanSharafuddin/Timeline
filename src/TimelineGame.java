@@ -97,7 +97,7 @@ public class TimelineGame implements Runnable {
 				}
 				tb.deselectPiece();
 				tb.b.undo();
-				tb.undoStatus();
+				tb.baseStatus();
 				tb.setHighlight();
 				tb.history.removeLast();
 				

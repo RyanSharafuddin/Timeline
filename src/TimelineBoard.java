@@ -23,7 +23,7 @@ public class TimelineBoard {
 	public Piece[] warmPieces = new Piece[NUMPIECES];
 	public Piece[] coldPieces = new Piece[NUMPIECES];
 	
-	public int moveNum = 0;
+	public int moveNum = 1;
 	private Stack<UndoDetails> history = new Stack<UndoDetails>();
 	
 	

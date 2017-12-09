@@ -24,7 +24,7 @@ public abstract class TimelineBot extends TimelineBoard {
 		Coord start = new Coord(toMove.p.getLocation());
 		move(toMove.p, toMove.toAdd);
 		Coord destination = new Coord(toMove.p.getLocation());
-		System.out.println("Bot moves from " + start + " to " + destination);
+		System.out.println("Bot moves " + toMove.p.name() + " from " + start + " (marker num: " + square(start).getMarker().num  + ") to " + destination);
 		return new Move(toMove.p, start, destination);
 	}
 }
