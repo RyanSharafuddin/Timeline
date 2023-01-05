@@ -22,7 +22,7 @@ public class TimelineGame implements Runnable {
 	public static boolean showValid;
 	public Opponent opp;
 	public boolean botIsWarm;
-	public static String gameLog = "/Users/Ryan/Desktop/Projects/Java/Eclipse Workspace/TimelineImproved/Gamelog.txt";
+	public static String gameLog = "Gamelog.txt";
 	
 	
 	public TimelineGame(boolean show, Opponent o, boolean e) {
